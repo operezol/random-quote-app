@@ -10,13 +10,14 @@ export function Counter() {
   return (
     <>
       {count.status === "loading" && <p>Loading...</p>}
-      {count.status === "idle" && <p>{count.value}</p>}
+      {count.status === "idle" && (
+        <>
+          <p>{count.value.quote}</p>
+          <p>{count.value.author}</p>
+        </>
+      )}
       {count.status === "failed" && <p>Error</p>}
-      <button
-        onClick={() => dispatch(incrementAsync())}
-      >
-        Add Async
-      </button>
+      <button onClick={() => dispatch(incrementAsync())}>Add Async</button>
     </>
   );
 }

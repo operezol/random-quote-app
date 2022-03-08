@@ -2,13 +2,17 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, AppThunk } from "../../app/store";
 import { fetchCount } from "./counterAPI";
 
+export interface Quote {
+  quote: string;
+  author: string;
+}
 export interface CounterState {
-  value: string;
+  value: Quote;
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: CounterState = {
-  value: "Default value",
+  value: { quote: "Press the button to get a Quote", author: "" },
   status: "idle",
 };
 
