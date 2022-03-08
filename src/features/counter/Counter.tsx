@@ -1,29 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import {
-  incrementAsync,
-  selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { incrementAsync, selectCount } from "./counterSlice";
 
 export function Counter() {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
 
   return (
-    <div>
-      <div className={styles.row}>
-        <span className={styles.value}>{count}</span>
-      </div>
-      <div className={styles.row}>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync())}
-        >
-          Add Async
-        </button>
-      </div>
-    </div>
+    <>
+      {count.status === "loading" && <p>Loading...</p>}
+      {count.status === "idle" && <p>{count.value}</p>}
+      {count.status === "failed" && <p>Error</p>}
+      <button
+        onClick={() => dispatch(incrementAsync())}
+      >
+        Add Async
+      </button>
+    </>
   );
 }
