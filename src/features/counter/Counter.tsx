@@ -19,7 +19,7 @@ export function Counter() {
       <div className={styles.row}>
         <button
           className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(1))}
+          onClick={() => dispatch(incrementAsync())}
         >
           Add Async
         </button>

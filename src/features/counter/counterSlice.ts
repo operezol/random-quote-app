@@ -3,19 +3,19 @@ import { RootState, AppThunk } from '../../app/store';
 import { fetchCount } from './counterAPI';
 
 export interface CounterState {
-  value: number;
+  value: string;
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CounterState = {
-  value: 0,
+  value: 'Default value',
   status: 'idle',
 };
 
 export const incrementAsync = createAsyncThunk(
   'counter/fetchCount',
-  async (amount: number) => {
-    const response = await fetchCount(amount);
+  async () => {
+    const response = await fetchCount();
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -36,7 +36,7 @@ export const counterSlice = createSlice({
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value += action.payload;
+        state.value = action.payload;
       });
   },
 });
